@@ -2,7 +2,6 @@ package pl.projects.first;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main00 {
@@ -20,17 +19,18 @@ public class Main00 {
 
         System.out.println("*".repeat(30));
 
-
-
-        Random random = new Random();
-
         Scanner scanner = new Scanner(System.in);
-        String command = "";
-        int chosen;
+        String command;
 
-        List<Figure> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(Figure.createFigure(random.nextDouble(3)));
+        List<IShape> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            list.add(Figure.createFigure(Shapes.Square));
+        }
+        for (int i = 0; i < 3; i++) {
+            list.add(Figure.createFigure(Shapes.Circle));
+        }
+        for (int i = 0; i < 3; i++) {
+            list.add(Figure.createFigure(Shapes.Rectangle));
         }
 
 
@@ -45,18 +45,21 @@ public class Main00 {
                 """);
 
         while (true) {
+            int chosen;
+            chosen = scanner.nextInt();
             command = scanner.next();
 
-
             if (command.equalsIgnoreCase("list")) {
-                System.out.println(list);
-
-            } else {
-                if (command.equalsIgnoreCase("show")) {
-
-
+                for (IShape i : list) {
+                    System.out.println(i);
                 }
+            }
+//            nie działa xD
+            if (command.equalsIgnoreCase("show" + chosen)) {
+                System.out.println("Your " + (chosen + 1) + " figure is: " + list.get(chosen));
             }
         }
     }
 }
+
+
